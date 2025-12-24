@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Allocation Graph Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Panel - Node Management -->
+        <div class="panel">
+            <h2 class="panel-title">Node Management</h2>
+            
+            <div class="node-form">
+                <div class="form-group">
+                    <label for="nodeName">Node Name</label>
+                    <input type="text" id="nodeName" placeholder="P1, R2, etc.">
+                </div>
+                
+                <div class="form-group">
+                    <label for="nodeType">Node Type</label>
+                    <select id="nodeType">
+                        <option value="process">Process</option>
+                        <option value="resource">Resource</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="instancesGroup" style="display: none;">
+                    <label for="resourceInstances">Instances</label>
+                    <input type="number" id="resourceInstances" min="1" max="10" value="1">
+                </div>
+                
+                <button id="addNodeBtn">Add Node</button>
+            </div>
+            
+            <div class="node-list">
+                <h3>Current Nodes</h3>
+                <div id="nodesList"></div>
+            </div>
+        </div>
+        
+        <!-- Main Panel - Graph Visualization -->
+        <div class="panel main-panel">
+            <h2 class="panel-title">Resource Allocation Graph</h2>
+            
+            <div class="controls">
+                <button id="addEdgeBtn">Add Edge</button>
+                <button id="removeEdgeBtn">Remove Edge</button>
+                <button id="detectDeadlockBtn">Detect Deadlock</button>
+                <button id="clearAllBtn" class="danger">Clear All</button>
+            </div>
+            
+            <div class="graph-container">
+                <canvas id="graphCanvas"></canvas>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #4299e1;"></div>
+                    <span>Process</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ed8936;"></div>
+                    <span>Resource</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #38a169; width: 2px; height: 20px;"></div>
+                    <span>Allocation Edge</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #e53e3e; width: 2px; height: 20px;"></div>
+                    <span>Request Edge</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Panel - Status and Analysis -->
+        <div class="panel">
+            <h2 class="panel-title">System Status</h2>
+            
+            <div class="status-panel">
+                <div class="status-card">
+                    <div class="status-title">Deadlock Status</div>
+                    <div class="status-value" id="deadlockStatus">No Deadlock Detected</div>
+                </div>
+                
+                <div class="status-card">
+                    <div class="status-title">Nodes Count</div>
+                    <div class="status-value">
+                        <span id="processCount">0</span> Processes | 
+                        <span id="resourceCount">0</span> Resources
+                    </div>
+                </div>
+                
+                <div class="status-card">
+                    <div class="status-title">Edges Count</div>
+                    <div class="status-value">
+                        <span id="allocationCount">0</span> Allocations | 
+                        <span id="requestCount">0</span> Requests
+                    </div>
+                </div>
+                
+                <div class="status-card">
+                    <div class="status-title">System Log</div>
+                    <div class="log-container" id="systemLog"></div>
+                </div>
+            </div>
+            
+            <div class="tutorial">
+                <h3>How to Use:</h3>
+                <ul>
+                    <li>Add Process/Resource nodes using the left panel</li>
+                    <li>Click "Add Edge" to create allocation/request edges</li>
+                    <li>Select source then destination node for edges</li>
+                    <li>Click "Detect Deadlock" to analyze the system</li>
+                    <li>Red edges show requests, green edges show allocations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
